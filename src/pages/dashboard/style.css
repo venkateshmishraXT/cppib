@@ -110,9 +110,9 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    left: 942px;
+    left: 550px;
     position: absolute;
-    top: 880px;
+    top: 40px;
     width: 456px;
   }
   
@@ -136,6 +136,15 @@
     height: 96px;
     position: relative;
     width: 100%;
+  }
+
+  .dashboard .frame-wrapper.positive {
+    background-color: #00218C;
+  }
+
+  .dashboard .frame-wrapper.positive .text-wrapper-3,
+  .dashboard .frame-wrapper.positive .text-wrapper-4 {
+    color: #fff;
   }
   
   .dashboard .frame-2 {
@@ -331,11 +340,11 @@
     font-family: "Helvetica Neue-Bold", Helvetica;
     font-size: 20px;
     font-weight: 700;
-    left: 945px;
+    left: 550px;
     letter-spacing: 0;
     line-height: 20.7px;
     position: absolute;
-    top: 830px;
+    top: 0px;
     width: 321px;
   }
   
@@ -344,11 +353,11 @@
     font-family: "Helvetica Neue-Bold", Helvetica;
     font-size: 20px;
     font-weight: 700;
-    left: 395px;
+    left: 0;
     letter-spacing: 0;
     line-height: 20.7px;
     position: absolute;
-    top: 830px;
+    top: 0px;
     width: 498px;
   }
   
@@ -1247,9 +1256,9 @@
     display: inline-flex;
     flex-direction: column;
     gap: 12px;
-    left: 397px;
+    left: 0px;
     position: absolute;
-    top: 880px;
+    top: 40px;
   }
   
   .dashboard .group-27 {
@@ -1304,6 +1313,7 @@
     letter-spacing: 0;
     line-height: 16.6px;
     position: relative;
+    margin: 8px 0;
   }
   
   .dashboard .text-wrapper-25 {
@@ -1579,3 +1589,14 @@
     width: 57px;
   }
   
+  .news-feeds {
+    position: relative;
+    margin-left: 400px;
+  }
+
+  .botFeed-graphics {
+    position: relative;
+    margin-left: 400px;
+    margin-top: 800px;
+    min-height: 40px;
+  }

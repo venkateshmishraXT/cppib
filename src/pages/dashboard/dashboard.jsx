@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React, {useState, useEffect} from "react";
 import "./style.css";
 import LineChart from "../../components/LineChart";
@@ -1364,8 +1365,54 @@ export const Dashboard = () => {
           <Nav />
         </div>
         <div className="text-wrapper-2">Sectors</div>
-        <div className="frame">
-          <img className="group" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-39@2x.png" />
+        <div className="botFeed-graphics">
+          this is test block
+        </div>
+        <div className="news-feeds">
+          <div className="m-a-headlines-news">M&amp;A Headlines &amp; News</div>
+          <div className="news">
+          <div className="frame-14">
+          <div className="group-27">
+            <img className="group-28" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-20-2@2x.png" />
+            <div className="frame-15">
+              <div className="text-wrapper-23">16 January 2023</div>
+              <p className="text-wrapper-24"><a target="_blank"  href="https://www.astrazeneca.com/media-centre/press-releases/2023/acquisition-of-neogene-therapeutics-completed.html">Acquisition of Neogene Therapeutics completed</a></p>
+              <div className="text-wrapper-25">AstraZeneca PLC</div>
+            </div>
+          </div>
+          <div className="group-29">
+            <img className="group-30" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-20-1@2x.png" />
+            <div className="frame-16">
+              <div className="text-wrapper-23">29 November 2022</div>
+              <p className="text-wrapper-24"><a target="_blank" href="https://www.astrazeneca.com/media-centre/press-releases/2022/astrazeneca-to-acquire-neogene-therapeutics-accelerating-ambition-in-oncology-cell-therapy.html#:~:text=AstraZeneca%20will%20acquire%20all%20outstanding,based%20and%20non%2Dcontingent%20consideration.">AstraZeneca acquires Neogene Therapeutics for $320 Million</a>
+              </p>
+              <div className="text-wrapper-26">AstraZeneca PLC</div>
+            </div>
+          </div>
+          <div className="group-31">
+            <img className="group-32" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-20@2x.png" />
+            <div className="frame-17">
+              <div className="text-wrapper-23">29 November 2022</div>
+              <p className="text-wrapper-24">
+                <a target="_blank" href="https://www.fiercebiotech.com/biotech/astrazeneca-forges-deeper-cell-therapies-200m-takeover-solid-tumor-tcr-biotech">AstraZeneca forges deeper into cell therapies with $200M takeover of solid tumor TCR Biotech</a>
+              </p>
+              <div className="text-wrapper-27">Fierce Biotech</div>
+            </div>
+          </div>
+        </div>
+          </div>
+          <div className="stocks-feed">
+            <div className="text-wrapper-6">Today’s change</div>
+            <div className="frame">
+            <div className="frame-wrapper positive">
+            <div className="frame-2">
+              <div className="text-wrapper-3">Manulife Global Fund - Healthcare Fund AA</div>
+              <div className="frame-3">
+                <div className="text-wrapper-4">0.173 0.19%</div>
+                <img className="arrow-up" alt="Arrow up" src="../../src/assets/arrow-up.svg" />
+              </div>
+            </div>
+          </div>
           <div className="frame-wrapper">
             <div className="frame-2">
               <div className="text-wrapper-3">Spire Healthcare Group PLC</div>
@@ -1404,14 +1451,15 @@ export const Dashboard = () => {
               </div>
             </div>
           </div>
+            </div>
+          </div>
+
         </div>
         <div className="group-wrapper">
           <div className="chat-wrapper">
             <img className="chat" alt="Chat" src="https://c.animaapp.com/UugQg0T9/img/chat-1-1.svg" />
           </div>
         </div>
-        <div className="text-wrapper-6">Today’s change</div>
-        <div className="m-a-headlines-news">M&amp;A Headlines &amp; News</div>
         <img
           className="CPP-investment-board"
           alt="Cpp investment board"
@@ -1514,36 +1562,6 @@ export const Dashboard = () => {
               handleActionsLoading={setIsActionsLoading}
               selectedAction={selectedAction}
             />
-        </div>
-        <div className="frame-14">
-          <div className="group-27">
-            <img className="group-28" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-20-2@2x.png" />
-            <div className="frame-15">
-              <div className="text-wrapper-23">30 August 2023</div>
-              <p className="text-wrapper-24">
-                Deal Snapshot: AstraZeneca to acquire Neogene therapeutics to access oncology cell therapy
-              </p>
-              <div className="text-wrapper-25">Neogene Therapeutics, Inc.</div>
-            </div>
-          </div>
-          <div className="group-29">
-            <img className="group-30" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-20-1@2x.png" />
-            <div className="frame-16">
-              <div className="text-wrapper-23">12 September 2023</div>
-              <p className="text-wrapper-24">AstraZeneca acquires Neogene Therapeutics for $320 Million</p>
-              <div className="text-wrapper-26">Neogene Therapeutics, Inc.</div>
-            </div>
-          </div>
-          <div className="group-31">
-            <img className="group-32" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-20@2x.png" />
-            <div className="frame-17">
-              <div className="text-wrapper-23">24 September 2023</div>
-              <p className="text-wrapper-24">
-                AstraZeneca forges deeper into cell therapies with $200M takeover of solid tumor TCR Biotech
-              </p>
-              <div className="text-wrapper-27">AstraZeneca PLC</div>
-            </div>
-          </div>
         </div>
       </div>
       <div className="group-35">
