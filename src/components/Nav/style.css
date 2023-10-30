@@ -1,0 +1,125 @@
+.box {
+    height: 278px;
+    width: 201px;
+  }
+  
+  .box .group {
+    height: 278px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 201px;
+  }
+  
+  .box .overlap {
+    height: 278px;
+    position: relative;
+  }
+  
+  .box .frame {
+    align-items: flex-start;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 32px;
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+  
+  .box .div {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 12px;
+    position: relative;
+  }
+  
+  .box .dashboard {
+    height: 30px;
+    position: relative;
+    width: 35px;
+  }
+  
+  .box .text-wrapper {
+    color: #ffffff;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+    height: 18px;
+    letter-spacing: 0;
+    line-height: 18.6px;
+    position: relative;
+    white-space: nowrap;
+    width: 154px;
+  }
+  
+  .box .overlap-wrapper {
+    height: 29px;
+    left: 2px;
+    position: relative;
+    top: -1px;
+    width: 32px;
+  }
+  
+  .box .overlap-group {
+    height: 29px;
+    position: relative;
+    top: 1px;
+    width: 34px;
+  }
+  
+  .box .bell {
+    height: 28px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 29px;
+  }
+  
+  .box .overlap-group-wrapper {
+    height: 16px;
+    left: 16px;
+    position: absolute;
+    top: 0;
+    width: 18px;
+  }
+  
+  .box .overlap-group-2 {
+    height: 16px;
+    position: relative;
+    width: 16px;
+  }
+  
+  .box .rectangle {
+    background-color: #00218c;
+    border-radius: 8px;
+    height: 13px;
+    left: 1px;
+    position: absolute;
+    top: 1px;
+    width: 13px;
+  }
+  
+  .box .text-wrapper-2 {
+    color: #ffffff;
+    font-family: "Helvetica Neue-Regular", Helvetica;
+    font-size: 8px;
+    font-weight: 400;
+    height: 16px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 8.3px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 16px;
+  }
+  
+  .box .vector {
+    height: 2px;
+    left: 49px;
+    position: absolute;
+    top: 31px;
+    width: 134px;
+  }
+  

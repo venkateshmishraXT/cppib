@@ -1,0 +1,43 @@
+.welcome {
+    background-image: url(../../assets/welcome-bg.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 980px;
+    position: relative;
+  }
+  
+  .welcome .text-wrapper {
+    color: #ffffff;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 77.3px;
+    position: absolute;
+    text-align: center;
+    top: 496px;
+    white-space: nowrap;
+    width: 100%;
+  }
+  
+  .welcome .div {
+    color: #ffffff;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 20.7px;
+    position: absolute;
+    text-align: center;
+    top: 598px;
+    width: 100%;
+  }
+  
+  .welcome .ellipse {
+    height: 91px;
+    left: 47%;
+    position: absolute;
+    top: 351px;
+    width: 91px;
+  }
+  
