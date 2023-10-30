@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import "./style.css";
-import { LineChart } from "../../components/LineChart";
-import { PieChart } from "../../components/PieChart";
-
+import LineChart from "../../components/LineChart";
+import PieChart from "../../components/PieChart";
+import Nav from "../../components/Nav";
+import ChatBoxCustom from "../../components/customChatbot";
 
 export const Dashboard = () => {
   const equity_Indices = [{
@@ -1302,11 +1303,42 @@ export const Dashboard = () => {
     // ...line chart data
   });
 
+  const [analysisResponse, setAnalysisResponse] = useState(null);
+  const [actionsResponse, setActionsResponse] = useState(null);
+  const [isMessageLoading, setIsMessageLoading] = useState(false);
+  const [isActionsLoading, setIsActionsLoading] = useState(false);
+  const [summaryHistory, setSummaryHistory] = useState([]);
+  const [sentimentHistory, setSentimentHistory] = useState([]);
+  const [selectedAction, setSelectedAction] = useState(null);
+
+  const handleSummaryApiResponse = (data) => {
+    setAnalysisResponse(data);
+    setSummaryHistory((prevSummaries) => [
+      ...prevSummaries,
+      data.data.summary,
+    ]);
+    setSentimentHistory((prevSentiments) => [
+      ...prevSentiments,
+      data.data.sentiment,
+    ]);
+  };
+
+  const handleActionApiResponse = (data) => {
+    setActionsResponse(data);
+  };
+
+  const updateChatBotContainer = () => selectedAction ;
+
   useEffect(() => {
     setLineChartData(equity_Indices);
     setTopGainersData(healthcare_topGainers);
     setSubSectorsData(healthcare_subSector);
   }, [])
+
+  useEffect(() => {
+    updateChatBotContainer();
+  }, [selectedAction])
+
   return (
     <div className="dashboard">
       <div className="overlap">
@@ -1320,7 +1352,6 @@ export const Dashboard = () => {
           alt="Screenshot"
           src="https://c.animaapp.com/UugQg0T9/img/screenshot-2023-10-17-at-14-39-1.png"
         />
-        <div className="rectangle" />
         <div className="div" />
         <p className="hello-sarah-your">
           <span className="text-wrapper">
@@ -1329,6 +1360,9 @@ export const Dashboard = () => {
           </span>
           <span className="span">Your dashboard</span>
         </p>
+        <div className="navBar">
+          <Nav />
+        </div>
         <div className="text-wrapper-2">Sectors</div>
         <div className="frame">
           <img className="group" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-39@2x.png" />
@@ -1472,7 +1506,15 @@ export const Dashboard = () => {
             </div>
           </div>
         </div>
-        <img className="group-26" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-111.png" />
+        <div className="sideBar">
+          <ChatBoxCustom
+              handleAnalysisResponse={handleSummaryApiResponse}
+              handleActionResponse={handleActionApiResponse}
+              handleAPILoading={setIsMessageLoading}
+              handleActionsLoading={setIsActionsLoading}
+              selectedAction={selectedAction}
+            />
+        </div>
         <div className="frame-14">
           <div className="group-27">
             <img className="group-28" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-20-2@2x.png" />
@@ -1503,8 +1545,6 @@ export const Dashboard = () => {
             </div>
           </div>
         </div>
-        <img className="group-33" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-119.png" />
-        <img className="group-34" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-120.png" />
       </div>
       <div className="group-35">
         <img className="group-36" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-10-2.png" />

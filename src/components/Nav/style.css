@@ -1,32 +1,33 @@
-.box {
+.nav {
+    height: 278px;
+    width: 201px;
+    left: 30px;
+    position: absolute;
+    top: 185px;
+
+  }
+  
+  .nav .group {
     height: 278px;
     width: 201px;
   }
   
-  .box .group {
-    height: 278px;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 201px;
-  }
-  
-  .box .overlap {
+  .nav .overlap {
     height: 278px;
     position: relative;
   }
   
-  .box .frame {
+  .nav .nav-list {
     align-items: flex-start;
     display: inline-flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 20px;
     left: 0;
     position: absolute;
     top: 0;
   }
   
-  .box .div {
+  .nav .nav-item {
     align-items: center;
     display: inline-flex;
     flex: 0 0 auto;
@@ -34,13 +35,13 @@
     position: relative;
   }
   
-  .box .dashboard {
+  .nav .dashboard {
     height: 30px;
     position: relative;
     width: 35px;
   }
   
-  .box .text-wrapper {
+  .nav .text-wrapper {
     color: #ffffff;
     font-family: "Helvetica Neue-Bold", Helvetica;
     font-size: 18px;
@@ -53,7 +54,7 @@
     width: 154px;
   }
   
-  .box .overlap-wrapper {
+  .nav .overlap-wrapper {
     height: 29px;
     left: 2px;
     position: relative;
@@ -61,36 +62,36 @@
     width: 32px;
   }
   
-  .box .overlap-group {
+  .nav .overlap-group {
     height: 29px;
     position: relative;
     top: 1px;
     width: 34px;
   }
   
-  .box .bell {
+  .nav .bell {
     height: 28px;
-    left: 0;
+    left: -35px;
     position: absolute;
     top: 0;
     width: 29px;
   }
   
-  .box .overlap-group-wrapper {
+  .nav .overlap-group-wrapper {
     height: 16px;
-    left: 16px;
+    left: -20px;
     position: absolute;
     top: 0;
     width: 18px;
   }
   
-  .box .overlap-group-2 {
+  .nav .overlap-group-2 {
     height: 16px;
     position: relative;
     width: 16px;
   }
   
-  .box .rectangle {
+  .nav .rectangle {
     background-color: #00218c;
     border-radius: 8px;
     height: 13px;
@@ -100,7 +101,7 @@
     width: 13px;
   }
   
-  .box .text-wrapper-2 {
+  .nav .text-wrapper-2 {
     color: #ffffff;
     font-family: "Helvetica Neue-Regular", Helvetica;
     font-size: 8px;
@@ -111,11 +112,11 @@
     line-height: 8.3px;
     position: absolute;
     text-align: center;
-    top: 0;
+    top: 3px;
     width: 16px;
   }
   
-  .box .vector {
+  .nav .vector {
     height: 2px;
     left: 49px;
     position: absolute;

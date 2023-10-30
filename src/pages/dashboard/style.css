@@ -1,6 +1,14 @@
 .group-3 {
   display: none;
 }
+.sideBar {
+  position: relative;
+}
+.sideBar .App {
+  position: fixed;
+  bottom: 20px;
+  left: 10px;
+}
 .dashboard {
     height: 1450px;
     overflow: hidden;
@@ -1230,7 +1238,7 @@
     height: 55px;
     left: 24px;
     position: absolute;
-    top: 165px;
+    bottom: 0;
     width: 322px;
   }
   

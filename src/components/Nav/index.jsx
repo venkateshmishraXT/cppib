@@ -1,48 +1,45 @@
 import React from "react";
 import "./style.css";
 
-export const Box = () => {
+export const Nav = () => {
   return (
-    <div className="box">
-      <div className="group">
-        <div className="overlap">
-          <div className="frame">
-            <div className="div">
-              <img className="dashboard" alt="Dashboard" src="dashboard.svg" />
-              <div className="text-wrapper">Your dashboard</div>
+    <div className="nav">
+        <div className="nav-list">
+            <div className="nav-item">
+                <img className="dashboard" alt="Dashboard" src="../src/assets/dashboard.png" />
+                <div className="text-wrapper">Your dashboard</div>
             </div>
-            <div className="div">
-              <img className="dashboard" alt="Dashboard" src="image.svg" />
-              <div className="text-wrapper">Your portfolio</div>
+            <div className="nav-item">
+                <img className="dashboard" alt="portfolio" src="../src/assets/folder.png" />
+                <div className="text-wrapper">Your portfolio</div>
             </div>
-            <div className="div">
-              <div className="dashboard">
+            <div className="nav-item">
+                <div className="dashboard">
                 <div className="overlap-wrapper">
-                  <div className="overlap-group">
-                    <img className="bell" alt="Bell" src="bell.svg" />
+                    <div className="overlap-group">
+                    <img className="bell" alt="alerts" src="../src/assets/bell.png" />
                     <div className="overlap-group-wrapper">
-                      <div className="overlap-group-2">
+                        <div className="overlap-group-2">
                         <div className="rectangle" />
                         <div className="text-wrapper-2">8</div>
-                      </div>
+                        </div>
                     </div>
-                  </div>
+                    </div>
                 </div>
-              </div>
-              <div className="text-wrapper">Your alerts</div>
+                </div>
+                <div className="text-wrapper">Your alerts</div>
             </div>
-            <div className="div">
-              <img className="dashboard" alt="Dashboard" src="dashboard-2.svg" />
-              <div className="text-wrapper">Reports</div>
+            <div className="nav-item">
+                <img className="dashboard" alt="Reports" src="../src/assets/report.png" />
+                <div className="text-wrapper">Reports</div>
             </div>
-            <div className="div">
-              <img className="dashboard" alt="Dashboard" src="dashboard-3.svg" />
-              <div className="text-wrapper">Experts network</div>
+            <div className="nav-item">
+                <img className="dashboard" alt="Experts" src="../src/assets/network.png" />
+                <div className="text-wrapper">Experts network</div>
             </div>
-          </div>
-          <img className="vector" alt="Vector" src="vector-11.svg" />
+            </div>
         </div>
-      </div>
-    </div>
   );
 };
+
+export default Nav;
