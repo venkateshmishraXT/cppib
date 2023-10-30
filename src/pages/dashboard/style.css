@@ -1,12 +1,15 @@
+.group-3 {
+  display: none;
+}
 .dashboard {
-    height: 1121px;
+    height: 1450px;
     overflow: hidden;
     position: relative;
     width: 1440px;
   }
   
   .dashboard .overlap {
-    height: 1123px;
+    height: 1450px;
     left: 0;
     position: absolute;
     top: 0;
@@ -14,7 +17,7 @@
   }
   
   .dashboard .screenshot {
-    height: 1121px;
+    height: 1450px;
     left: 0;
     position: absolute;
     top: 0;
@@ -22,7 +25,7 @@
   }
   
   .dashboard .img {
-    height: 1121px;
+    height: 1450px;
     left: 0;
     object-fit: cover;
     position: absolute;
@@ -45,7 +48,7 @@
   .dashboard .div {
     background-color: #ffffff;
     border-radius: 15px;
-    height: 1123px;
+    height: 1450px;
     left: 353px;
     position: absolute;
     top: 0;
@@ -101,7 +104,7 @@
     gap: 12px;
     left: 942px;
     position: absolute;
-    top: 692px;
+    top: 880px;
     width: 456px;
   }
   
@@ -293,7 +296,7 @@
     height: 82px;
     left: 1340px;
     position: absolute;
-    top: 1022px;
+    top: 1310px;
     width: 82px;
   }
   
@@ -324,7 +327,7 @@
     letter-spacing: 0;
     line-height: 20.7px;
     position: absolute;
-    top: 653px;
+    top: 830px;
     width: 321px;
   }
   
@@ -337,7 +340,7 @@
     letter-spacing: 0;
     line-height: 20.7px;
     position: absolute;
-    top: 653px;
+    top: 830px;
     width: 498px;
   }
   
@@ -368,13 +371,13 @@
     left: 385px;
     position: absolute;
     top: 202px;
-    width: 354px;
+    width: 345px;
   }
   
   .dashboard .overlap-2 {
     height: 413px;
     position: relative;
-    width: 352px;
+    width: 345px;
   }
   
   .dashboard .overlap-group-wrapper {
@@ -382,7 +385,7 @@
     left: 0;
     position: absolute;
     top: 0;
-    width: 352px;
+    width: 345px;
   }
   
   .dashboard .overlap-group-2 {
@@ -395,11 +398,11 @@
     backdrop-filter: blur(10px) brightness(100%);
     background-color: #d4dae54c;
     border-radius: 20px;
-    height: 413px;
+    height: 575px;
     left: 1px;
     position: absolute;
     top: 0;
-    width: 351px;
+    width: 340px;
   }
   
   .dashboard .group-2 {
@@ -506,7 +509,7 @@
     height: 290px;
     left: 19px;
     position: absolute;
-    top: 95px;
+    top: 44px;
     width: 302px;
   }
   
@@ -833,25 +836,25 @@
   
   .dashboard .group-17 {
     height: 413px;
-    left: 749px;
+    left: 735px;
     position: absolute;
     top: 201px;
-    width: 331px;
+    width: 340px;
   }
   
   .dashboard .overlap-group-4 {
     background-image: url(https://c.animaapp.com/UugQg0T9/img/group-10-1.png);
     background-size: 100% 100%;
-    height: 413px;
+    height: 575px;
     position: relative;
-    width: 321px;
+    width: 340px;
   }
   
   .dashboard .overlap-4 {
     height: 313px;
     left: 15px;
     position: absolute;
-    top: 73px;
+    top: 45px;
     width: 311px;
   }
   
@@ -1065,9 +1068,13 @@
     letter-spacing: 0;
     line-height: 12.4px;
     position: absolute;
-    top: 21px;
+    top: 10px;
     white-space: nowrap;
     width: 283px;
+  }
+
+  .dashboard .text-wrapper-29 {
+    top: 15px;
   }
   
   .dashboard .group-19 {
@@ -1094,18 +1101,13 @@
   
   .dashboard .group-21 {
     height: 241px;
-    left: 36px;
+    left: 20px;
     position: absolute;
-    top: 108px;
-    width: 241px;
+    top: 45px;
+    width: 300px;
   }
   
   .dashboard .overlap-6 {
-    height: 263px;
-    left: -11px;
-    position: relative;
-    top: -11px;
-    width: 263px;
   }
   
   .dashboard .ellipse-9 {
@@ -1239,7 +1241,7 @@
     gap: 12px;
     left: 397px;
     position: absolute;
-    top: 692px;
+    top: 880px;
   }
   
   .dashboard .group-27 {
