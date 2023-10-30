@@ -10,9 +10,7 @@ function ChatBoxCustom({
   handleActionsLoading,
   selectedAction,
 }) {
-  const [messages, setMessages] = useState([
-    { type: "bot", text: "Hi, I'm custom BotNeo. How can I help you?" },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [sessionID, setSession] = useState(null);
   const [dataModelResponse, setDataModelResponse] = useState(null);
@@ -180,15 +178,18 @@ function ChatBoxCustom({
               )}
 
               <div key={idx} className={`message ${message.type}`}>
-                <div className="text">{message.text}</div>
-              </div>
-              {message.type === "user" && (
-                <div className="user-avatar">
-                  <div className="user-icon">
-                    <span></span>
-                  </div>
+                <div className="bubble">
+                  {message.type === "user" && (
+                    <div className="user-avatar">
+                      <div className="user-icon">
+                        <span>SR</span>
+                      </div>
+                    </div>
+                  )}
+                  <div className="message-text">{message.text}</div>
+                  
                 </div>
-              )}
+              </div>
             </div>
           ))}
           <span id="scroll-view"></span>

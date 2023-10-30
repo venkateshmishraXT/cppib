@@ -1,6 +1,6 @@
 import { apiConfig } from "../../config/apiConfig";
 
-const agentName = "Agent Neo!";
+const agentName = "Sarah";
 
 const config = {
   api: {
