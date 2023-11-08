@@ -51,7 +51,7 @@ export const postAction = async (
   try {
     const response = await axios.post(
       // `${apiUrl}/message-actions`,
-      `https://78ab-86-187-226-126.ngrok.io/v1/analyze`,
+      `https://3592-93-186-144-66.ngrok-free.app/v1/analyze`,
       // {
       //   sessionID: currentSessionID,
       //   speaker: currentSpeaker,
