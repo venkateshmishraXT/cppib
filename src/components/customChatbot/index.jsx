@@ -127,34 +127,35 @@ function ChatBoxCustom({
         // handleAPILoading(false);
 
         handleActionsLoading(true);
-        console.log('handleActionsLoading started');
         const textActionResponse = await postAction(
           newMessage,
           "user"
         );
-        console.log('textActionResponse set -----' + textActionResponse);
+        const apiResponse = textActionResponse?.data.choices[0].message.content
+        const validateResponse = JSON.parse(apiResponse)
+        console.log('response it valid json object' + validateResponse);
         handleActionResponse(textActionResponse);
         handleAPILoading(false);
         handleActionsLoading(false);
-        console.log('handleActionsLoading stopped');
+
         const agentResponse = (textActionResponse.data.choices ? textActionResponse.data.choices[0].message.content : " ");
-        //console.log('agentResponse set to ------' + agentResponse);
         //setDataModelResponse(agentResponse);
         const botDefaultResponse = "Your dashboard has been updated with the latest information.";
         
-        console.log('botDefaultResponse set to ------' + botDefaultResponse);
         setMessages((prevMessages) => [
           ...prevMessages,
           { type: "bot", text: botDefaultResponse },
         ]);
-        console.log('botDefaultResponse msg set to ------');
         return agentResponse;
     } catch (error) {
       const botErrorResponse = "I am facing connectivity issue, please try again later.";
+      const botRetryResponse = "Not able to find any relevant data, please refine your query for better experiance.";
       setMessages((prevMessages) => [
         ...prevMessages,
-        { type: "bot", text: botErrorResponse },
+        { type: "bot", text: botRetryResponse },
       ]);
+      handleAPILoading(false);
+      handleActionsLoading(false);
       console.error("API request error:", error);
     }
   };

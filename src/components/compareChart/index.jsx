@@ -23,7 +23,9 @@ ChartJS.register(
 
 const CompareChart = ({ chartData }) => {
   // Extract the years and data values
+  console.log('CompareChart-----' + chartData);
   const chartDataList = chartData.data;
+  console.log('CompareChart data -----' + chartDataList);
   const years = chartDataList.map(item => item.date);
   const values1 = chartDataList.map(item => parseFloat(item.value1.replace(/[^\d.]*/g, '')));
   const values2 = chartDataList.map(item => parseFloat(item.value2.replace(/[^\d.]*/g, '')));

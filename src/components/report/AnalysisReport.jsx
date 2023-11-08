@@ -5,6 +5,7 @@ import Actions from "./Actions";
 import Sources from "./Sources";
 import LinearChart from "../chart";
 import CompareChart from "../compareChart";
+import Table from "../table";
 import "./style.css";
 
 const AnalysisReport = ({
@@ -110,6 +111,20 @@ const AnalysisReport = ({
               <div className="column">
                 <h3>Insights</h3>
                 <p>{apiResponseObj.content.Summary}</p>
+              </div>
+            </div>
+          ) : ''}
+
+          { apiResponseObj.content_format == 'Tabular' ? (
+            <div className="row">
+              <div className="column">
+                <h3>{apiResponseObj.content.heading}</h3>
+                {/* <LineChart lineChartData={apiResponseObj.content} /> */}
+                <Table columns={apiResponseObj.content.data.columns} data={apiResponseObj.content.data.results} />
+              </div>
+              <div className="column">
+                <h3>Key highlights</h3>
+                <p>{apiResponseObj.content?.keyHighlight}</p>
               </div>
             </div>
           ) : ''}
