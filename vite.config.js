@@ -9,8 +9,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        nested: resolve(__dirname, 'components/chart/index.html'),
+        main: resolve(__dirname, 'chart/index.html'),
+        nested: resolve(__dirname, 'src/components/chart/index.html'),
       },
     },
   },
