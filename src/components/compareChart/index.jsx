@@ -21,13 +21,16 @@ ChartJS.register(
   Legend
 );
 
-const LinearChart = ({ chartData }) => {
+const CompareChart = ({ chartData }) => {
   // Extract the years and data values
-  const years = chartData.data.map(item => item.date);
-  const values = chartData.data.map(item => parseFloat(item.value.replace(/[^\d.]*/g, '')));
+  const chartDataList = chartData.data;
+  const years = chartDataList.map(item => item.date);
+  const values1 = chartDataList.map(item => parseFloat(item.value1.replace(/[^\d.]*/g, '')));
+  const values2 = chartDataList.map(item => parseFloat(item.value2.replace(/[^\d.]*/g, '')));
 
   console.log('list of years' + years);
-  console.log('list of values' + values);
+  console.log('list of values1' + values1);
+  console.log('list of values2' + values2);
 
   const options = {
     responsive: true,
@@ -72,9 +75,17 @@ const LinearChart = ({ chartData }) => {
     datasets: [
       {
         label: "value",
-        data: values,
+        data: values1,
         borderColor: '#36A2EB',
         backgroundColor: '#9BD0F5',
+        pointBackgroundColor: "#000",
+        yAxisID: "y",
+      },
+      {
+        label: "value",
+        data: values2,
+        borderColor: '#FF6384',
+        backgroundColor: '#FFB1C1',
         pointBackgroundColor: "#000",
         yAxisID: "y",
       },
@@ -84,4 +95,4 @@ const LinearChart = ({ chartData }) => {
   return <Line options={options} data={lineGraphData} />;
 };
 
-export default LinearChart;
+export default CompareChart;

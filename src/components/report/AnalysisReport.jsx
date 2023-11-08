@@ -4,6 +4,7 @@ import Summary from "./Summary";
 import Actions from "./Actions";
 import Sources from "./Sources";
 import LinearChart from "../chart";
+import CompareChart from "../compareChart";
 import "./style.css";
 
 const AnalysisReport = ({
@@ -83,13 +84,28 @@ const AnalysisReport = ({
             {/* <Summary content={apiResponseObj.content}  /> */}
           </div>
           ) : ''}
-          { apiResponseObj.content_format == 'json' ? (
+          { apiResponseObj.content_format == 'timeseries' ? (
             <div className="row">
 
               <div className="column">
-                <h3>{apiResponseObj.content.heading}</h3>
+                <h3>{apiResponseObj.content.Heading}</h3>
                 {/* <LineChart lineChartData={apiResponseObj.content} /> */}
                 <LinearChart chartData={apiResponseObj.content} />
+              </div>
+              <div className="column">
+                <h3>Insights</h3>
+                <p>{apiResponseObj.content.Summary}</p>
+              </div>
+            </div>
+          ) : ''}
+
+          { apiResponseObj.content_format == 'timeseries-multi' ? (
+            <div className="row">
+
+              <div className="column">
+                <h3>{apiResponseObj.content.Heading}</h3>
+                {/* <LineChart lineChartData={apiResponseObj.content} /> */}
+                <CompareChart chartData={apiResponseObj.content} />
               </div>
               <div className="column">
                 <h3>Insights</h3>
