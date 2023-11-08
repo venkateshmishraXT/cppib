@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiConfig, apiConfigIngest } from "../config/apiConfig";
+import { apiConfig, apiConfigIngest } from "./apiConfig";
 
 const apiUrl = `${apiConfig.protocol}://${apiConfig.host}${apiConfig.port}/api`;
 const apiUrlIngest = `${apiConfig.protocol}://${apiConfigIngest.host}${apiConfigIngest.port}/api`;
@@ -19,7 +19,6 @@ export const getSession = async () => {
 };
 
 export const postMessage = async (
-  currentSessionID,
   newMessage,
   currentSpeaker
 ) => {
@@ -27,7 +26,6 @@ export const postMessage = async (
     const response = await axios.post(
       `${apiUrl}/message?${currentSpeaker}`,
       {
-        sessionID: currentSessionID,
         speaker: currentSpeaker,
         message: newMessage,
       },
@@ -39,29 +37,47 @@ export const postMessage = async (
     );
     return response;
   } catch (error) {
-    console.error("postMessage API error:", error);
-    throw error;
+    const response = {};
+    return response;
+    //console.error("postMessage API error:", error);
+    //throw error;
   }
 };
 
 export const postAction = async (
-  currentSessionID,
   newMessage,
   currentSpeaker
 ) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/message-actions`,
+      // `${apiUrl}/message-actions`,
+      `https://9e2f-86-187-226-126.ngrok.io/v1/analyze`,
+      // {
+      //   sessionID: currentSessionID,
+      //   speaker: currentSpeaker,
+      //   query: newMessage,
+      // },
       {
-        sessionID: currentSessionID,
-        speaker: currentSpeaker,
-        message: newMessage,
-      },
-      {
-        headers: {
-          "x-functions-key": apiConfig.keys.actions,
+        "messages": [{
+          "role": currentSpeaker,
+          "content": newMessage
         },
-      }
+        {
+          "role": "system",
+          // "content": "You are an advanced AI healthcare investment analyst, specializing in processing diverse un-structured data related to companies,including company statistics, technology trends, and more. Your primary objective is to extract valuable insights and patterns from this data to assist users in making informed investment decisions. Analyze the provided dataset and respond to user queries with precise and actionable insights derived from the data. Generate a response in the following format: { \"content_format\": \"json | paragraph | list\",  \"content\": \"Your response in the specified format\" }. If response contains data that should be structured as timeseries, format it as follows: {\"content_format\": \"json\",\"content\": {\"year\":\"2018\",\"data\": \"100\"}}. If the response is in paragraph form, use the following structure:{\"content_format\": \"paragraph\",\"content\": \"Your response as a paragraph.\"}.If the response should be presented as a bulleted list, provide it like this:{\"content_format\": \"list\",\"content\": [\"Item 1\", \"Item 2\", \"Item 3\"]}"
+          // "content": "You are an advanced AI healthcare investment analyst, specializing in processing diverse un-structured data related to companies, including company statistics, technology trends, and more. Your primary objective is to extract valuable insights and patterns from this data to assist users in making informed investment decisions. Analyze the provided dataset and respond to user queries with precise and actionable insights derived from the data. Generate a response in the following format: { \"content_format\": \"json | paragraph | list\",  \"content\": \"Your response in the specified format\" }. If response contains data that should be structured as timeseries, format it as follows: {\"content_format\": \"json\",\"content\": {\"year\":\"2018\",\"data\": \"100\"}}. If the response is in paragraph form, use the following structure:{\"content_format\": \"paragraph\",\"content\": {\"heading\":\"heading of the summary\",\"data\": \"Your response as a paragraph and highlight keywords in it.\", \"keyHighlight\": \"Provide key takeaways in bullet list for quick user consumption \"}} .If the response should be presented as a bulleted list, provide it like this:{\"content_format\": \"list\", \"content\": {\"heading\":\"heading of the list\",\"intro\":\"opening statement for the response \",\"data\": \"provide ordered list of items\", \"summary\": \"provide extensive summary relevent for the response\"}}}}}"
+          // "content": "You are an advanced investment analyst, specializing in processing diverse unstructured data related to the company, including company statistics, technology trends, revenue data and insights and key highlights. Your primary objective is to extract valuable insights and patterns from this data to assist users in making informed investment decisions.Analyze the provided dataset and respond to user queries with precise and actionable insights derived from the data. Please highlight keywords in the response. Generate a response in the following format: { \"content_format\": \"json | paragraph | list\",  \"content\": \"Your response in the specified format\" }. If response contains data that should be structured as timeseries, format it as follows: {\"content_format\": \"json\",\"content\": {{\"year\":\"2018\",\"data\": \"100\"},\"Summary\": \"Provide summary for the response \"}}. If the response is in paragraph form, use the following structure:{\"content_format\": \"paragraph\",\"content\": {\"heading\":\"heading of the summary\",\"data\": \"Your response as a paragraph and highlight keywords in it.\", \"keyHighlight\": \"Provide key takeaways in ordered list of items \"}} .If the response should be presented as a bulleted list, provide it like this:{\"content_format\": \"list\", \"content\": {\"heading\":\"heading of the list\",\"intro\":\"opening statement for the response \",\"data\": \"provide ordered list of items\", \"summary\": \"provide extensive summary relevant for the response\"}}}}}"
+          "content": "You are an advanced investment analyst, specializing in processing diverse unstructured data related to the company, including company statistics, technology trends, revenue data and insights and key highlights. Your primary objective is to extract valuable insights and patterns from this data to assist users in making informed investment decisions.Analyze the provided dataset and respond to user queries with precise and actionable insights derived from the data. Please highlight keywords in the response. Generate a response in the following format: { \"content_format\": \"json | paragraph | list\",  \"content\": \"Your response in the specified format\" }. If response contains data that should be structured as timeseries, format it as follows: {\"content_format\": \"json\",\"content\": {\"data\":\"[{\"date\":\"2018\",\"value\": \"100\"}]\",\"Summary\": \"Provide summary for the response \",\"heading\":\"provide title for the response\",\"axisinfo\": {\"xaxis\":\"\",\"yaxis\": \"\"}}}. If the response is in paragraph form, use the following structure:{\"content_format\": \"paragraph\",\"content\": {\"heading\":\"heading of the summary\",\"data\": \"Your response as a paragraph and highlight keywords in it.\", \"keyHighlight\": \"Provide key takeaways in ordered list of items \"}} .If the response should be presented as a bulleted list, provide it like this:{\"content_format\": \"list\", \"content\": {\"heading\":\"heading of the list\",\"intro\":\"opening statement for the response \",\"data\": \"provide ordered list of items\", \"summary\": \"provide extensive summary relevant for the response\"}}}}}"
+        }],
+        "temperature": 0,
+        "max_tokens": 10000,
+        "top_p": 0.6
+    },
+      // {
+      //   headers: {
+      //     "Access-Control-Allow-Origin": "*"
+      //   },
+      // }
     );
     return response;
   } catch (error) {

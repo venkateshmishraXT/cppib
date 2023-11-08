@@ -11,7 +11,6 @@
 }
 .dashboard {
     height: 1450px;
-    overflow: hidden;
     position: relative;
     width: 1440px;
   }
@@ -315,6 +314,7 @@
     position: absolute;
     top: 1310px;
     width: 82px;
+    display: none;
   }
   
   .dashboard .chat-wrapper {
@@ -1315,7 +1315,9 @@
     position: relative;
     margin: 8px 0;
   }
-  
+  .dashboard .text-wrapper-24 a {
+    color: #00218c;
+  }
   .dashboard .text-wrapper-25 {
     align-self: stretch;
     color: #00218c;
@@ -1596,7 +1598,14 @@
 
   .botFeed-graphics {
     position: relative;
-    margin-left: 400px;
+    margin-left: 385px;
     margin-top: 800px;
     min-height: 40px;
+    margin-bottom: 30px;
+    width: 72%;
+  }
+
+  .analyse-container .smart-chart {
+    max-width: 100%;
+    margin-top: 25px;
   }

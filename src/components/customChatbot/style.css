@@ -25,6 +25,7 @@
 .messages {
   position: relative;
   width: 320px;
+  overflow-y: auto;
 }
 .message .text {
   padding: 7px;
@@ -67,7 +68,7 @@
 }
 
 .message.bot .text {
-  background-color: #006a4d;
+  background-color: #00218C;
   color: #fff;
 }
 
@@ -91,7 +92,7 @@
 .input-area button {
   flex: 1;
   padding: 10px 20px;
-  background-color: #006a4d;
+  background-color: #00218C;
   color: white;
   border: none;
   cursor: pointer;
@@ -114,7 +115,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #006a4d;
+  background-color: #00218C;
 }
 
 .bot-avatar p {
@@ -126,7 +127,7 @@
   height: 0;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-right: 8px solid #006a4d;
+  border-right: 8px solid #00218C;
   position: absolute;
   left: 49px;
   top: 37px;

@@ -1,0 +1,14 @@
+.skeleton {
+    background-color: #E0E0E0;
+    height: 50px;
+    border-radius: 4px;
+    margin: 15px 0;
+    animation: shine 1.2s infinite alternate;
+  }
+  
+  @keyframes shine {
+    to {
+      background-color: #F5F5F5;
+    }
+  }
+  

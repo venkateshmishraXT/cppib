@@ -1,0 +1,12 @@
+.app-header {
+  background-color: #006a4d;
+  color: #fff;
+  padding: 1px 70px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 20px;
+}
+
+.app-header a {
+  color: #fff;
+  text-decoration: none;
+}

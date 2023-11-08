@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { createChatBotMessage } from "react-chatbot-kit";
 import config from "../../config/botConfig";
 import { getSession, postMessage, postAction } from "../../config/apiEndpoints";
 import "./style.css";
 
 function ChatBoxCustom({
+  setState,
   handleAnalysisResponse,
   handleAPILoading,
   handleActionResponse,
   handleActionsLoading,
   selectedAction,
+  setIsChatBotRequestStarted,
 }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -40,10 +43,8 @@ function ChatBoxCustom({
    */
 
   const initiateAgentChat = useCallback(async () => {
-    if (sessionID) {
       try {
         await postMessage(
-          sessionID,
           config.initialMessages[0].message,
           "agent"
         );
@@ -51,19 +52,18 @@ function ChatBoxCustom({
         console.error("initiateAgentChat request error:", error);
         // TODO: display a user-friendly error message
       }
-    }
   }, [sessionID]);
 
   useEffect(() => {
-    fetchSessionID();
-    if (sessionID && !selectedAction) {
-      initiateAgentChat();
-    }
+    // fetchSessionID();
+    // if (sessionID && !selectedAction) {
+    //   initiateAgentChat();
+    // }
     // This is invoked when user selects a action pre-populated after API response
     if (selectedAction) {
       handleAPILoading(true);
       setDataModelResponse(selectedAction);
-      getLLMDataByAgent(selectedAction);
+      //getLLMDataByAgent(selectedAction);
       handleAPILoading(false);
       setMessages((prevMessages) => [
         ...prevMessages,
@@ -73,7 +73,7 @@ function ChatBoxCustom({
         .getElementById("scroll-view")
         .scrollIntoView({ behavior: "smooth" });
     }
-  }, [fetchSessionID, initiateAgentChat, sessionID, selectedAction]);
+  }, [initiateAgentChat, selectedAction]);
 
   /**
    * Method name: handleUserMessage
@@ -88,6 +88,7 @@ function ChatBoxCustom({
       // trigger XHR call to get LLM modal data from downstream.
       getBotResponse(input.trim());
       setInput("");
+      setIsChatBotRequestStarted(true);
     }
   };
 
@@ -99,9 +100,9 @@ function ChatBoxCustom({
 
   const getLLMDataByAgent = async (selectedAction) => {
     try {
-      const fetchedSessionID = sessionID;
+      //const fetchedSessionID = sessionID;
       const agentMessage = selectedAction ? selectedAction : dataModelResponse;
-      await postMessage(fetchedSessionID, agentMessage, "agent");
+      await postMessage(agentMessage, "agent");
     } catch (error) {
       console.error("API request error:", error);
     }
@@ -115,31 +116,45 @@ function ChatBoxCustom({
 
   const getLLMData = async (newMessage) => {
     try {
-      const fetchedSessionID = sessionID;
-      if (fetchedSessionID) {
+      //const fetchedSessionID = sessionID;
         handleAPILoading(true);
-        const textAnalysisResponse = await postMessage(
-          fetchedSessionID,
-          newMessage,
-          "user"
-        );
-        handleAnalysisResponse(textAnalysisResponse);
-        handleAPILoading(false);
+        // const postUserMessage = await postMessage(
+        //   newMessage,
+        //   "user"
+        // );
+        // const textAnalysisResponse = postUserMessage ? postUserMessage : "";
+        // handleAnalysisResponse(textAnalysisResponse);
+        // handleAPILoading(false);
 
         handleActionsLoading(true);
+        console.log('handleActionsLoading started');
         const textActionResponse = await postAction(
-          fetchedSessionID,
           newMessage,
           "user"
         );
+        console.log('textActionResponse set -----' + textActionResponse);
         handleActionResponse(textActionResponse);
+        handleAPILoading(false);
         handleActionsLoading(false);
-
-        const agentResponse = textActionResponse.data.actions[0].information;
-        setDataModelResponse(agentResponse);
+        console.log('handleActionsLoading stopped');
+        const agentResponse = (textActionResponse.data.choices ? textActionResponse.data.choices[0].message.content : " ");
+        //console.log('agentResponse set to ------' + agentResponse);
+        //setDataModelResponse(agentResponse);
+        const botDefaultResponse = "Your dashboard has been updated with the latest information.";
+        
+        console.log('botDefaultResponse set to ------' + botDefaultResponse);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { type: "bot", text: botDefaultResponse },
+        ]);
+        console.log('botDefaultResponse msg set to ------');
         return agentResponse;
-      }
     } catch (error) {
+      const botErrorResponse = "I am facing connectivity issue, please try again later.";
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: "bot", text: botErrorResponse },
+      ]);
       console.error("API request error:", error);
     }
   };
@@ -166,8 +181,7 @@ function ChatBoxCustom({
       <div className="chatbox">
         <div className="messages">
           {messages.map((message, idx) => (
-            <div
-              className={
+            <div className={
                 message.type === "bot" ? "bot-container1" : "user-container"
               }
             >

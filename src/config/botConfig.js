@@ -1,7 +1,7 @@
 import { createChatBotMessage } from "react-chatbot-kit";
 import { apiConfig } from "./apiConfig";
 
-const botName = "Agent Neo!";
+const botName = "Sarah";
 
 const config = {
   api: {
@@ -16,10 +16,10 @@ const config = {
   botName: botName,
   customStyles: {
     botMessageBox: {
-      backgroundColor: "#00864f",
+      backgroundColor: "#fff",
     },
     chatButton: {
-      backgroundColor: "#00864f",
+      backgroundColor: "#fff",
     },
   },
 };

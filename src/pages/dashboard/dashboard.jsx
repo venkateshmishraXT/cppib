@@ -5,6 +5,7 @@ import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import Nav from "../../components/Nav";
 import ChatBoxCustom from "../../components/customChatbot";
+import AnalysisReport from "../../components/report/AnalysisReport";
 
 export const Dashboard = () => {
   const equity_Indices = [{
@@ -1311,6 +1312,7 @@ export const Dashboard = () => {
   const [summaryHistory, setSummaryHistory] = useState([]);
   const [sentimentHistory, setSentimentHistory] = useState([]);
   const [selectedAction, setSelectedAction] = useState(null);
+  const [isChatBotRequestStarted, setIsChatBotRequestStarted] = useState([]);
 
   const handleSummaryApiResponse = (data) => {
     setAnalysisResponse(data);
@@ -1334,6 +1336,7 @@ export const Dashboard = () => {
     setLineChartData(equity_Indices);
     setTopGainersData(healthcare_topGainers);
     setSubSectorsData(healthcare_subSector);
+    setIsChatBotRequestStarted(false);
   }, [])
 
   useEffect(() => {
@@ -1366,7 +1369,17 @@ export const Dashboard = () => {
         </div>
         <div className="text-wrapper-2">Sectors</div>
         <div className="botFeed-graphics">
-          this is test block
+          {isChatBotRequestStarted ? (
+          <AnalysisReport
+            analysisResponse={analysisResponse}
+            actionsResponse={actionsResponse}
+            isMessageLoading={isMessageLoading}
+            isActionsLoading={isActionsLoading}
+            summaryHistory={summaryHistory}
+            sentimentHistory={sentimentHistory}
+            setSelectedAction={setSelectedAction}
+          />
+          ) : (" ")}
         </div>
         <div className="news-feeds">
           <div className="m-a-headlines-news">M&amp;A Headlines &amp; News</div>
@@ -1561,10 +1574,11 @@ export const Dashboard = () => {
               handleAPILoading={setIsMessageLoading}
               handleActionsLoading={setIsActionsLoading}
               selectedAction={selectedAction}
+              setIsChatBotRequestStarted={setIsChatBotRequestStarted}
             />
         </div>
       </div>
-      <div className="group-35">
+      {/* <div className="group-35">
         <img className="group-36" alt="Group" src="https://c.animaapp.com/UugQg0T9/img/group-10-2.png" />
         <div className="overlap-9">
           <div className="group-37">
@@ -1617,7 +1631,7 @@ export const Dashboard = () => {
           </p>
         </div>
         <div className="text-wrapper-28">Sectors</div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -8,3 +8,15 @@
 #chartTitleText {
     display: none;
 }
+
+/* 
+.smart-chart svg rect:first-of-type {
+    fill: #F1F4F7;
+    stroke: none;
+    backdrop-filter: blur(10px) brightness(100%);
+    -webkit-backdrop-filter: blur(10px) brightness(100%);
+}
+
+.smart-element {
+    background: none;
+} */
