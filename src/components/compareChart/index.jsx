@@ -26,10 +26,14 @@ const CompareChart = ({ chartData }) => {
   const years = chartData.data.map(item => item.date);
   const values1 = chartData.data.map(item => parseFloat(item.value1.replace(/[^\d.]*/g, '')));
   const values2 = chartData.data.map(item => parseFloat(item.value2.replace(/[^\d.]*/g, '')));
+  const label1 = chartData.data.map(item => item.label1);
+  const label2 = chartData.data.map(item => item.label2);
 
   console.log('list of years' + years);
   console.log('list of values1' + values1);
   console.log('list of values2' + values2);
+  console.log('list of label1' + label1);
+  console.log('list of label2' + label2);
 
   const options = {
     responsive: true,
@@ -73,7 +77,7 @@ const CompareChart = ({ chartData }) => {
     labels: years,
     datasets: [
       {
-        label: "value",
+        label: label1[0],
         data: values1,
         borderColor: '#36A2EB',
         backgroundColor: '#9BD0F5',
@@ -81,7 +85,7 @@ const CompareChart = ({ chartData }) => {
         yAxisID: "y",
       },
       {
-        label: "value",
+        label: label2[0],
         data: values2,
         borderColor: '#FF6384',
         backgroundColor: '#FFB1C1',
