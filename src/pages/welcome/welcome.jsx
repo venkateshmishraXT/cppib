@@ -6,7 +6,7 @@ export const Welcome = () => {
     <div className="welcome">
       <div className="text-wrapper">Hello Sarah</div>
       <p className="div">Welcome to your digital knowledge hub</p>
-      <img className="ellipse" alt="spinner" src="../src/assets/spinner.gif" />
+      <img className="ellipse" alt="spinner" src="/assets/spinner.gif" />
     </div>
   );
 };
