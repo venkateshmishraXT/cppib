@@ -1,25 +1,28 @@
 import React from "react";
+import "./style.css";
 
 function Table({ columns, data }) {
-  // Use the state and functions returned from useTable to build your UI
+   const key1 = columns[0];
+   const key2 = columns[1];
   // Render the UI for your table
   return (
-    <div className="App">
-            <table>
-                <tr>
-                    <th>{columns[0]}</th>
-                    <th>{columns[1]}</th>
-                </tr>
-                {data.map((val, key) => {
-                    return (
-                        <tr key={key}>
-                            <td>{val.columns[0]}</td>
-                            <td>{val.columns[1]}</td>
-                        </tr>
-                    )
-                })}
-            </table>
-        </div>
+    <div className="table-box">
+        <table>
+            <tr>
+                <th>{key1}</th>
+                <th>{key2}</th>
+            </tr>
+            {data.map((val, key) => {
+                return (
+                    <tr key={key}>
+                        <td>{val[key1]}</td>
+                        <td>{val[key2]}</td>
+                    </tr>
+                )
+            })}
+        </table>
+    </div>
+
   );
 }
 

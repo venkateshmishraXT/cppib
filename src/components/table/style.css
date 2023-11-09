@@ -1,0 +1,25 @@
+.table-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+table {
+    border: 2px solid #001b75;
+    border-collapse: collapse;
+}
+ 
+th {
+    border: 1px solid black;
+}
+ 
+td {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid;
+}
+
+tr:nth-child(even) {
+    background-color: #d4ddef66;
+  }

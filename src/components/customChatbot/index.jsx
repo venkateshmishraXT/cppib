@@ -132,8 +132,9 @@ function ChatBoxCustom({
           "user"
         );
         const apiResponse = textActionResponse?.data.choices[0].message.content
-        const validateResponse = JSON.parse(apiResponse)
-        console.log('response it valid json object' + validateResponse);
+        const unescapedApiResponse = apiResponse?.replace(/\\"/g, '"').replace(/\\n/g, '\n');
+        const validateResponse = JSON.parse(unescapedApiResponse)
+        console.log('response it valid json object' + JSON.stringify(validateResponse));
         handleActionResponse(textActionResponse);
         handleAPILoading(false);
         handleActionsLoading(false);
