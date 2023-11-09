@@ -1251,23 +1251,20 @@ export const Dashboard = () => {
   }];
 
   const healthcare_topGainers = [{
-		Browser: 'Chrome',
-		Share: 68.95
+		Browser: 'ADYEY',
+		Share: 34.27
 	}, {
-		Browser: 'Firefox',
-		Share: 10.67
+		Browser: 'NVEI',
+		Share: 19.75
 	}, {
-		Browser: 'IE',
-		Share: 6.42
+		Browser: 'MQ',
+		Share: 18.69
 	}, {
-		Browser: 'Safari',
-		Share: 5.35
+		Browser: 'VFS',
+		Share: 17.69
 	}, {
-		Browser: 'Edge',
-		Share: 4.2
-	}, {
-		Browser: 'Other',
-		Share: 4.67
+		Browser: 'NFE',
+		Share: 16.61
 	}];
 
   const healthcare_subSector = [{
