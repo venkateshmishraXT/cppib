@@ -238,7 +238,7 @@ function ChatBoxCustom({
           <span id="scroll-view"></span>
         </div>
         <div className="botIcon">
-          <img src="../src/assets/chatbot.svg" alt="chat bot" />
+          <img src="/assets/chatbot.svg" alt="chat bot" />
         </div>
         <div className="input-area">
           <input
