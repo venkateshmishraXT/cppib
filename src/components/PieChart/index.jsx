@@ -33,6 +33,12 @@ export const PieChart = ({pieChartData}) => {
 		bottom: 10
 	};
 	const dataSource = pieChartData;
+	let keysData = []
+	for (const key in dataSource[0]) {
+	keysData.push(key);
+	}
+	const dataField= keysData[1];
+	const displayText = keysData[0];
 	const colorScheme = 'scheme32';
 	const seriesGroups = [{
 		type: 'donut',
@@ -40,15 +46,14 @@ export const PieChart = ({pieChartData}) => {
 		offsetY: 150,
 		dataSource: pieChartData,
 		series: [{
-			dataField: 'Share',
-			displayText: 'Browser',
+			dataField: dataField,
+			displayText: displayText,
 			labelRadius: 120,
 			initialAngle: 10,
 			radius: 130,
 			innerRadius: 90,
 			centerOffset: 0,
 			formatSettings: {
-				sufix: '%',
 				decimalPlaces: 1
 			}
 		}]

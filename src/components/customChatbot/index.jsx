@@ -12,11 +12,14 @@ function ChatBoxCustom({
   handleActionsLoading,
   selectedAction,
   setIsChatBotRequestStarted,
+  setTopGainersData,
+  setHandleSpinnerLoading,
 }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [sessionID, setSession] = useState(null);
   const [dataModelResponse, setDataModelResponse] = useState(null);
+  const [widgetFilter, setWidgetFilter] = useState(null);
 
   /**
    * Method name: fetchSessionID
@@ -88,7 +91,12 @@ function ChatBoxCustom({
       // trigger XHR call to get LLM modal data from downstream.
       getBotResponse(input.trim());
       setInput("");
-      setIsChatBotRequestStarted(true);
+      if (widgetFilter && widgetFilter == 'Pie') {
+        setIsChatBotRequestStarted(false);
+        setHandleSpinnerLoading(true);
+      } else {
+        setIsChatBotRequestStarted(true);
+      }
     }
   };
 
@@ -108,6 +116,10 @@ function ChatBoxCustom({
     }
   };
 
+  const handleFilterChange = (e) => {
+    setWidgetFilter(e.target.value);
+  };
+
   /**
    * Method name: getLLMData
    * Description:  This method responsible to trigger XHR to get LLM model data for user from downstream.
@@ -115,6 +127,7 @@ function ChatBoxCustom({
    */
 
   const getLLMData = async (newMessage) => {
+    console.log('getLLMData custom chat bot started');
     try {
       //const fetchedSessionID = sessionID;
         handleAPILoading(true);
@@ -129,13 +142,20 @@ function ChatBoxCustom({
         handleActionsLoading(true);
         const textActionResponse = await postAction(
           newMessage,
-          "user"
+          "user",
+          widgetFilter
         );
         const apiResponse = textActionResponse?.data.choices[0].message.content
         const unescapedApiResponse = apiResponse?.replace(/\\"/g, '"').replace(/\\n/g, '\n');
         const validateResponse = JSON.parse(unescapedApiResponse)
         console.log('response it valid json object' + JSON.stringify(validateResponse));
-        handleActionResponse(textActionResponse);
+        if (widgetFilter && widgetFilter == 'Pie') {
+          setTopGainersData(validateResponse.content);
+          setHandleSpinnerLoading(false);
+        } else {
+          handleActionResponse(textActionResponse);
+        }
+        
         handleAPILoading(false);
         handleActionsLoading(false);
 
@@ -180,6 +200,13 @@ function ChatBoxCustom({
 
   return (
     <div className="App">
+      <div className="filters">
+        <h4>Widget Filters</h4>
+        <input id="Pie" type="radio" value="Pie" name="filters" onChange={handleFilterChange} />
+        <label htmlFor="Pie">Sectors / Pie chart</label>
+        <input id="Other" type="radio" value="Other" name="filters" onChange={handleFilterChange} checked={widgetFilter === "Other"} />
+        <label htmlFor="Other">Others</label>
+      </div>
       <div className="chatbox">
         <div className="messages">
           {messages.map((message, idx) => (
@@ -211,7 +238,7 @@ function ChatBoxCustom({
           <span id="scroll-view"></span>
         </div>
         <div className="botIcon">
-          <img src="/assets/chatbot.svg" alt="chat bot" />
+          <img src="../src/assets/chatbot.svg" alt="chat bot" />
         </div>
         <div className="input-area">
           <input

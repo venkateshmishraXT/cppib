@@ -1,11 +1,14 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React, {useState, useEffect} from "react";
 import "./style.css";
+import Spinner from "../../components/loader/Spinner";
 import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
+import DoughnutChart from "../../components/doughnut";
 import Nav from "../../components/Nav";
 import ChatBoxCustom from "../../components/customChatbot";
 import AnalysisReport from "../../components/report/AnalysisReport";
+import { postAction } from "../../config/apiEndpoints";
 
 export const Dashboard = () => {
   const equity_Indices = [{
@@ -1251,20 +1254,23 @@ export const Dashboard = () => {
   }];
 
   const healthcare_topGainers = [{
-		Browser: 'ADYEY',
-		Share: 34.27
+		Browser: 'Chrome',
+		Share: 68.95
 	}, {
-		Browser: 'NVEI',
-		Share: 19.75
+		Browser: 'Firefox',
+		Share: 10.67
 	}, {
-		Browser: 'MQ',
-		Share: 18.69
+		Browser: 'IE',
+		Share: 6.42
 	}, {
-		Browser: 'VFS',
-		Share: 17.69
+		Browser: 'Safari',
+		Share: 5.35
 	}, {
-		Browser: 'NFE',
-		Share: 16.61
+		Browser: 'Edge',
+		Share: 4.2
+	}, {
+		Browser: 'Other',
+		Share: 4.67
 	}];
 
   const healthcare_subSector = [{
@@ -1292,16 +1298,9 @@ export const Dashboard = () => {
     new: 0.19,
     stockStatus: "up",
 	}];
-  const [lineChartData, setLineChartData] = useState({
-    // ...line chart data
-  });
-  const [topGainersData, setTopGainersData] = useState({
-    // ...line chart data
-  });
-  const [subSectorsData, setSubSectorsData] = useState({
-    // ...line chart data
-  });
-
+  const [lineChartData, setLineChartData] = useState([]);
+  const [topGainersData, setTopGainersData] = useState([]);
+  const [subSectorsData, setSubSectorsData] = useState([]);
   const [analysisResponse, setAnalysisResponse] = useState(null);
   const [actionsResponse, setActionsResponse] = useState(null);
   const [isMessageLoading, setIsMessageLoading] = useState(false);
@@ -1310,6 +1309,7 @@ export const Dashboard = () => {
   const [sentimentHistory, setSentimentHistory] = useState([]);
   const [selectedAction, setSelectedAction] = useState(null);
   const [isChatBotRequestStarted, setIsChatBotRequestStarted] = useState([]);
+  const [handleSpinnerLoading, setHandleSpinnerLoading] = useState(true);
 
   const handleSummaryApiResponse = (data) => {
     setAnalysisResponse(data);
@@ -1331,7 +1331,8 @@ export const Dashboard = () => {
 
   useEffect(() => {
     setLineChartData(equity_Indices);
-    setTopGainersData(healthcare_topGainers);
+    //setTopGainersData(healthcare_topGainers);
+    getLLMData("Please provide top gainers in canada", "Pie");
     setSubSectorsData(healthcare_subSector);
     setIsChatBotRequestStarted(false);
   }, [])
@@ -1339,6 +1340,24 @@ export const Dashboard = () => {
   useEffect(() => {
     updateChatBotContainer();
   }, [selectedAction])
+
+  const getLLMData = async (newMessage, component) => {
+    try {
+        const response = await postAction(
+          newMessage,
+          "user",
+          component
+        );
+        setHandleSpinnerLoading(true);
+        const topGainerResponse = response?.data.choices[0].message.content;
+        const unescapedApiResponse = topGainerResponse?.replace(/\\"/g, '"').replace(/\\n/g, '\n');
+        const validateResponse = JSON.parse(unescapedApiResponse)
+        setTopGainersData(validateResponse.content);
+        setHandleSpinnerLoading(false);
+      } catch (error) {
+        console.error("API request error for top gainers:", error);
+      }
+  };
 
   return (
     <div className="dashboard">
@@ -1419,7 +1438,7 @@ export const Dashboard = () => {
               <div className="text-wrapper-3">Manulife Global Fund - Healthcare Fund AA</div>
               <div className="frame-3">
                 <div className="text-wrapper-4">0.173 0.19%</div>
-                <img className="arrow-up" alt="Arrow up" src="/assets/arrow-up.svg" />
+                <img className="arrow-up" alt="Arrow up" src="../../src/assets/arrow-up.svg" />
               </div>
             </div>
           </div>
@@ -1545,7 +1564,9 @@ export const Dashboard = () => {
         <div className="group-17">
           <div className="overlap-group-4">
             <div className="overlap-4">
-              <PieChart pieChartData={topGainersData} />
+              <div className="spinner-wrapper">{handleSpinnerLoading && <Spinner />}</div>
+              <DoughnutChart chartData={topGainersData} />
+              {/* <PieChart pieChartData={topGainersData} /> */}
             </div>
             <p className="text-wrapper-22">Top gainers - sector breakdown</p>
           </div>
@@ -1559,7 +1580,8 @@ export const Dashboard = () => {
             </div>
             <div className="group-21">
               <div className="overlap-6">
-                <PieChart pieChartData={subSectorsData} />
+                <DoughnutChart chartData={subSectorsData} />
+                {/* <PieChart pieChartData={subSectorsData} /> */}
               </div>
             </div>
           </div>
@@ -1572,6 +1594,8 @@ export const Dashboard = () => {
               handleActionsLoading={setIsActionsLoading}
               selectedAction={selectedAction}
               setIsChatBotRequestStarted={setIsChatBotRequestStarted}
+              setTopGainersData={setTopGainersData}
+              setHandleSpinnerLoading={setHandleSpinnerLoading}
             />
         </div>
       </div>

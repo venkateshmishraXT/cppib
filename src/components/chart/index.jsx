@@ -26,9 +26,6 @@ const LinearChart = ({ chartData }) => {
   const years = chartData.data.map(item => item.date);
   const values = chartData.data.map(item => parseFloat(item.value.replace(/[^\d.]*/g, '')));
 
-  console.log('list of years' + years);
-  console.log('list of values' + values);
-
   const options = {
     responsive: true,
     interaction: {

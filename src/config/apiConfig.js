@@ -3,7 +3,7 @@ const isLocalhost = true;
 export const apiConfig = {
   protocol: isLocalhost ? "http" : "https",
   host: isLocalhost ? "localhost" : "psgenaipoc.azurewebsites.net",
-  port: isLocalhost ? ":5010" : "",
+  port: isLocalhost ? ":5000" : "",
   keys: {
     session: isLocalhost
       ? "dummy_functions_key"
@@ -20,7 +20,7 @@ export const apiConfig = {
 export const apiConfigIngest = {
   protocol: isLocalhost ? "http" : "https",
   host: isLocalhost ? "localhost" : "genaipocmttest.azurewebsites.net",
-  port: isLocalhost ? ":5010" : "",
+  port: isLocalhost ? ":5000" : "",
   keys: {
     upload: isLocalhost
       ? "dummy_functions_key"

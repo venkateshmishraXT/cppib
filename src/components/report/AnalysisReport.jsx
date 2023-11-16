@@ -29,8 +29,6 @@ const AnalysisReport = ({
   if (unescapedApiResponse) {
     apiResponseObj = JSON.parse(unescapedApiResponse);
   }
-  
-  console.log('json parshed response -----' + JSON.stringify(apiResponseObj));
 
   const containerClass = `analyse-container ${
     isMessageLoading ? "loading" : ""
@@ -122,10 +120,10 @@ const AnalysisReport = ({
                 {/* <LineChart lineChartData={apiResponseObj.content} /> */}
                 <Table columns={apiResponseObj.content.data.columns} data={apiResponseObj.content.data.results} />
               </div>
-              <div className="column keyhighlight-box">
+              {apiResponseObj.content?.keyHighlight.length ? (<div className="column keyhighlight-box">
                 <h3>Key highlights</h3>
                 <p>{apiResponseObj.content?.keyHighlight}</p>
-              </div>
+              </div>): ''}
             </div>
           ) : ''}
         { references ? (

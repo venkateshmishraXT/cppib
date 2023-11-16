@@ -29,12 +29,6 @@ const CompareChart = ({ chartData }) => {
   const label1 = chartData.data.map(item => item.label1);
   const label2 = chartData.data.map(item => item.label2);
 
-  console.log('list of years' + years);
-  console.log('list of values1' + values1);
-  console.log('list of values2' + values2);
-  console.log('list of label1' + label1);
-  console.log('list of label2' + label2);
-
   const options = {
     responsive: true,
     interaction: {
