@@ -27,6 +27,9 @@ const DoughnutChart = ({ chartData }) => {
     plugins: {
       legend: {
         position: 'bottom',
+        labels: {
+          boxWidth: 15
+        }
       },
       tooltip: {
         enabled: true,

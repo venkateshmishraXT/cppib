@@ -47,6 +47,9 @@ const LineChart = ({ lineChartData }) => {
       legend: {
         display: true,
         position: 'bottom',
+        labels: {
+          boxWidth: 15
+        }
       },
       tooltip: {
         enabled: true,
