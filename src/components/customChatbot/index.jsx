@@ -129,7 +129,12 @@ function ChatBoxCustom({
     console.log('getLLMData custom chat bot started');
     try {
       //const fetchedSessionID = sessionID;
-        handleAPILoading(true);
+        if (widgetFilter && widgetFilter == 'Pie') {
+          setHandleSpinnerLoading(true);
+        } else {
+          handleAPILoading(true);
+          handleActionsLoading(true);
+        }
         // const postUserMessage = await postMessage(
         //   newMessage,
         //   "user"
@@ -137,8 +142,7 @@ function ChatBoxCustom({
         // const textAnalysisResponse = postUserMessage ? postUserMessage : "";
         // handleAnalysisResponse(textAnalysisResponse);
         // handleAPILoading(false);
-
-        handleActionsLoading(true);
+        
         const textActionResponse = await postAction(
           newMessage,
           "user",
