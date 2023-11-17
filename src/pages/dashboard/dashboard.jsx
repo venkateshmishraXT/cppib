@@ -1568,7 +1568,7 @@ export const Dashboard = () => {
               <DoughnutChart chartData={topGainersData} />
               {/* <PieChart pieChartData={topGainersData} /> */}
             </div>
-            <p className="text-wrapper-22">Top gainers - sector breakdown</p>
+            <p className="text-wrapper-22">Sector Top Trends</p>
           </div>
         </div>
         <div className="group-19">

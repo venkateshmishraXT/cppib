@@ -204,11 +204,11 @@ function ChatBoxCustom({
         <h4>Widget Filters</h4>
         <ul>
           <li>
-            <input id="Pie" type="radio" value="Pie" name="filters" onChange={handleFilterChange} />
+            <input id="Pie" type="radio" value="Pie" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Pie'} />
             <label htmlFor="Pie">Sector Top Trends</label>
           </li>
           <li>
-            <input id="Other" type="radio" value="Other" name="filters" onChange={handleFilterChange} checked />
+            <input id="Other" type="radio" value="Other" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Other'} defaultChecked />
             <label htmlFor="Other">Ask Investment Assistant</label>
           </li>
         </ul>
