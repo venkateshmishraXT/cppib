@@ -92,7 +92,6 @@ function ChatBoxCustom({
       getBotResponse(input.trim());
       setInput("");
       if (widgetFilter && widgetFilter == 'Pie') {
-        setIsChatBotRequestStarted(false);
         setHandleSpinnerLoading(true);
       } else {
         setIsChatBotRequestStarted(true);
@@ -208,7 +207,7 @@ function ChatBoxCustom({
             <label htmlFor="Pie">Sector Top Trends</label>
           </li>
           <li>
-            <input id="Other" type="radio" value="Other" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Other'} defaultChecked />
+            <input id="Other" type="radio" value="Other" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Other'} />
             <label htmlFor="Other">Ask Investment Assistant</label>
           </li>
         </ul>
