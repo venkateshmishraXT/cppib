@@ -202,10 +202,16 @@ function ChatBoxCustom({
     <div className="App">
       <div className="filters">
         <h4>Widget Filters</h4>
-        <input id="Pie" type="radio" value="Pie" name="filters" onChange={handleFilterChange} />
-        <label htmlFor="Pie">Sectors / Pie chart</label>
-        <input id="Other" type="radio" value="Other" name="filters" onChange={handleFilterChange} checked={widgetFilter === "Other"} />
-        <label htmlFor="Other">Others</label>
+        <ul>
+          <li>
+            <input id="Pie" type="radio" value="Pie" name="filters" onChange={handleFilterChange} />
+            <label htmlFor="Pie">Sector Top Trends</label>
+          </li>
+          <li>
+            <input id="Other" type="radio" value="Other" name="filters" onChange={handleFilterChange} checked />
+            <label htmlFor="Other">Ask Investment Assistant</label>
+          </li>
+        </ul>
       </div>
       <div className="chatbox">
         <div className="messages">

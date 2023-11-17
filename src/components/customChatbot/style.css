@@ -243,6 +243,23 @@
   margin-left: -12px;
 }
 
+.filters {
+  margin-bottom: 10px;
+  background: #fff;
+  color: #001b75;
+  border-radius: 22px;
+}
+
 .filters h4 {
-  margin: 10px 0;
+  margin: 0 0 10px;
+
+}
+
+.filters ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.filters ul li {
+  list-style: none;
 }
