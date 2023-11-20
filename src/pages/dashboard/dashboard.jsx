@@ -1438,7 +1438,7 @@ export const Dashboard = () => {
               <div className="text-wrapper-3">Manulife Global Fund - Healthcare Fund AA</div>
               <div className="frame-3">
                 <div className="text-wrapper-4">0.173 0.19%</div>
-                <img className="arrow-up" alt="Arrow up" src="../../src/assets/arrow-up.svg" />
+                <img className="arrow-up" alt="Arrow up" src="/assets/arrow-up.svg" />
               </div>
             </div>
           </div>
