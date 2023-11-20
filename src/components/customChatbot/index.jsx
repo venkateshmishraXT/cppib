@@ -186,7 +186,6 @@ function ChatBoxCustom({
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      // 👇 Get input value
       handleUserMessage();
     }
   };
