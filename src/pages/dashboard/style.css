@@ -1631,7 +1631,8 @@
     margin: 0 10px 0 5px;
   }
 
-.company-wrapper {}
-
-.company-wrapper ul { list-style: none;}
+.analyse-container .company-wrapper ul li { list-style: disc; margin-left: 12px;}
 .analyse-container .company-wrapper p { padding: 0;}
+.analyse-container .company-wrapper .table-box { display: block;}
+.analyse-container .company-wrapper .table-box table{ width: 100%;}
+h4 { color: #10207b;}

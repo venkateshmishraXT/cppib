@@ -118,7 +118,7 @@ const AnalysisReport = ({
               <div className="column">
                 <h3>{apiResponseObj.content.heading}</h3>
                 {/* <LineChart lineChartData={apiResponseObj.content} /> */}
-                <Table columns={apiResponseObj.content.data.columns} data={apiResponseObj.content.data.results} />
+                <Table showTitle={true} columns={apiResponseObj.content.data.columns} data={apiResponseObj.content.data.results} />
               </div>
               {apiResponseObj.content?.keyHighlight.length ? (<div className="column keyhighlight-box">
                 <h3>Key highlights</h3>

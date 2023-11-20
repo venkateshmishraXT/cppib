@@ -1,17 +1,18 @@
 import React from "react";
 import "./style.css";
 
-function Table({ columns, data }) {
+function Table({ columns, data, showTitle}) {
    const key1 = columns[0];
    const key2 = columns[1];
   // Render the UI for your table
   return (
     <div className="table-box">
         <table>
-            <tr>
+            {showTitle ? <tr>
                 <th>{key1}</th>
                 <th>{key2}</th>
             </tr>
+            : ''}
             {data.map((val, key) => {
                 return (
                     <tr key={key}>
