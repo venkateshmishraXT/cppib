@@ -3,6 +3,7 @@ import Spinner from "../loader/Spinner";
 import Summary from "./Summary";
 import Actions from "./Actions";
 import Sources from "./Sources";
+import Company from "./Company";
 import LinearChart from "../chart";
 import CompareChart from "../compareChart";
 import Table from "../table";
@@ -100,7 +101,6 @@ const AnalysisReport = ({
 
           { apiResponseObj.content_format == 'timeseries-multi' ? (
             <div className="row">
-
               <div className="column">
                 <h3>{apiResponseObj.content.Heading}</h3>
                 {/* <LineChart lineChartData={apiResponseObj.content} /> */}
@@ -126,9 +126,16 @@ const AnalysisReport = ({
               </div>): ''}
             </div>
           ) : ''}
-        { references ? (
+
+          { apiResponseObj.content_format == 'company' ? (
+            <Company company={apiResponseObj} />
+          ) : ''}
+
+          { references ? (
             <Sources sources={references} isActionsLoading={isActionsLoading} />
           ) : ''}
+
+
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ function ChatBoxCustom({
   const [input, setInput] = useState("");
   const [sessionID, setSession] = useState(null);
   const [dataModelResponse, setDataModelResponse] = useState(null);
-  const [widgetFilter, setWidgetFilter] = useState(null);
+  const [widgetFilter, setWidgetFilter] = useState('Other');
 
   /**
    * Method name: fetchSessionID
@@ -117,6 +117,7 @@ function ChatBoxCustom({
 
   const handleFilterChange = (e) => {
     setWidgetFilter(e.target.value);
+    console.log('selected filter -- ' + e.target.value);
   };
 
   /**
@@ -142,7 +143,6 @@ function ChatBoxCustom({
         // const textAnalysisResponse = postUserMessage ? postUserMessage : "";
         // handleAnalysisResponse(textAnalysisResponse);
         // handleAPILoading(false);
-        
         const textActionResponse = await postAction(
           newMessage,
           "user",
@@ -206,9 +206,13 @@ function ChatBoxCustom({
       <div className="filters">
         <h4>Widget Filters</h4>
         <ul>
-          <li>
+        <li>
             <input id="Pie" type="radio" value="Pie" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Pie'} />
             <label htmlFor="Pie">Sector Top Trends</label>
+          </li>
+          <li>
+            <input id="Company" type="radio" value="Company" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Company'} />
+            <label htmlFor="Company">Company Insight</label>
           </li>
           <li>
             <input id="Other" type="radio" value="Other" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Other'} />
@@ -247,14 +251,14 @@ function ChatBoxCustom({
           <span id="scroll-view"></span>
         </div>
         <div className="botIcon">
-          <img src="/assets/chatbot.svg" alt="chat bot" />
+          <img src="../src/assets/chatbot.svg" alt="chat bot" />
         </div>
         <div className="input-area">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask insights from your AI Assistant"
+            placeholder= {widgetFilter == 'Company' ? "Please enter company name" : "Ask insights from your AI Assistant"} 
           />
           {/*<button onClick={handleUserMessage}>&gt;&gt;</button>*/}
         </div>

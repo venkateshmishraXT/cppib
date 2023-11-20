@@ -1630,3 +1630,8 @@
     vertical-align:top;
     margin: 0 10px 0 5px;
   }
+
+.company-wrapper {}
+
+.company-wrapper ul { list-style: none;}
+.analyse-container .company-wrapper p { padding: 0;}

@@ -1438,7 +1438,7 @@ export const Dashboard = () => {
               <div className="text-wrapper-3">Manulife Global Fund - Healthcare Fund AA</div>
               <div className="frame-3">
                 <div className="text-wrapper-4">0.173 0.19%</div>
-                <img className="arrow-up" alt="Arrow up" src="/assets/arrow-up.svg" />
+                <img className="arrow-up" alt="Arrow up" src="../../src/assets/arrow-up.svg" />
               </div>
             </div>
           </div>
@@ -1575,7 +1575,7 @@ export const Dashboard = () => {
           <div className="overlap-5">
             <div className="group-20">
               <div className="overlap-group-4">
-                <div className="text-wrapper-22 text-wrapper-29">Healthcare - Sub sectors</div>
+                <div className="text-wrapper-22 text-wrapper-29">Market Cap - Healthcare sub sectors</div>
               </div>
             </div>
             <div className="group-21">
