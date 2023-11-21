@@ -207,7 +207,7 @@ function ChatBoxCustom({
         <ul>
         <li>
             <input id="Pie" type="radio" value="Pie" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Pie'} />
-            <label htmlFor="Pie">Sector Top Trends</label>
+            <label htmlFor="Pie">Previous investment memo trends</label>
           </li>
           <li>
             <input id="Company" type="radio" value="Company" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Company'} />
