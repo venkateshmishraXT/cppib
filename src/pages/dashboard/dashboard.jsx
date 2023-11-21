@@ -1332,7 +1332,7 @@ export const Dashboard = () => {
   useEffect(() => {
     setLineChartData(equity_Indices);
     //setTopGainersData(healthcare_topGainers);
-    getLLMData("Please provide top gainers in healthcare incanada", "Pie");
+    getLLMData("top gainers in healthcare sector in canada", "Pie");
     setSubSectorsData(healthcare_subSector);
     setIsChatBotRequestStarted(false);
   }, [])
