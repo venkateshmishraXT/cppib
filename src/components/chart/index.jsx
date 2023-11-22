@@ -32,8 +32,8 @@ const LinearChart = ({ chartData }) => {
 
   // Extract the years and data values
   const years = chartData.data.map(item => item[dateText]);
-  const values = chartData.data.map(item => item[dataField]);
-  //const values = chartData.data.map(item => parseFloat((item[dataField]).replace(/[^\d.]*/g, '')));
+  //const values = chartData.data.map(item => item[dataField]);
+  const values = chartData.data.map(item => parseFloat((item[dataField]).replace(/[^\d.]*/g, '')));
 
   const options = {
     responsive: true,
