@@ -78,6 +78,17 @@ function ChatBoxCustom({
     }
   }, [initiateAgentChat, selectedAction]);
 
+  useEffect(() => {
+    scrollToLatestChat();
+  }, [messages]);
+
+  const scrollToLatestChat = () => {
+    const myElement = document.getElementById("scroll-view");
+    const topPos = myElement.offsetTop;
+    const el = document.querySelector(".messages");
+    el.scrollTop = topPos;
+  };
+
   /**
    * Method name: handleUserMessage
    * Description:  This method triggers when user clicks on send button after entering a message and it get set in react local state.
