@@ -1489,11 +1489,11 @@ export const Dashboard = () => {
             <img className="chat" alt="Chat" src="https://c.animaapp.com/UugQg0T9/img/chat-1-1.svg" />
           </div>
         </div>
-        <img
+        {/* <img
           className="CPP-investment-board"
           alt="Cpp investment board"
           src="https://c.animaapp.com/UugQg0T9/img/cpp-investment-board-logo-2@2x.png"
-        />
+        /> */}
         <div className="text-wrapper-7">Markets Data</div>
         <div className="overlap-wrapper">
           <div className="overlap-2">
