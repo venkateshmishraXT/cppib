@@ -117,7 +117,7 @@ export const fetchGainers = async (
     const response = await axios.post(
       // `${apiUrl}/message-actions`,
       //`https://4.157.185.216/v1/analyze`,
-      `https://3592-93-186-144-66.ngrok-free.app/v1/analyze`,
+      `https://1dea-38-242-186-240.ngrok-free.app/v1/analyze`,
       // {
       //   sessionID: currentSessionID,
       //   speaker: currentSpeaker,
