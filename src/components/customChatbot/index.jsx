@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
 import config from "../../config/botConfig";
 import { getSession, postMessage, postAction } from "../../config/apiEndpoints";
+import InputArea from "../InputArea";
 import "./style.css";
 
 function ChatBoxCustom({
@@ -14,12 +15,13 @@ function ChatBoxCustom({
   setIsChatBotRequestStarted,
   setTopGainersData,
   setHandleSpinnerLoading,
+  setParsedResponse
 }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [sessionID, setSession] = useState(null);
   const [dataModelResponse, setDataModelResponse] = useState(null);
-  const [widgetFilter, setWidgetFilter] = useState('Other');
+  const [widgetFilter, setWidgetFilter] = useState("Other");
 
   /**
    * Method name: fetchSessionID
@@ -46,15 +48,12 @@ function ChatBoxCustom({
    */
 
   const initiateAgentChat = useCallback(async () => {
-      try {
-        await postMessage(
-          config.initialMessages[0].message,
-          "agent"
-        );
-      } catch (error) {
-        console.error("initiateAgentChat request error:", error);
-        // TODO: display a user-friendly error message
-      }
+    try {
+      await postMessage(config.initialMessages[0].message, "agent");
+    } catch (error) {
+      console.error("initiateAgentChat request error:", error);
+      // TODO: display a user-friendly error message
+    }
   }, [sessionID]);
 
   useEffect(() => {
@@ -102,7 +101,7 @@ function ChatBoxCustom({
       // trigger XHR call to get LLM modal data from downstream.
       getBotResponse(input.trim());
       setInput("");
-      if (widgetFilter && widgetFilter == 'Pie') {
+      if (widgetFilter && widgetFilter == "Pie") {
         setHandleSpinnerLoading(true);
       } else {
         setIsChatBotRequestStarted(true);
@@ -128,7 +127,7 @@ function ChatBoxCustom({
 
   const handleFilterChange = (e) => {
     setWidgetFilter(e.target.value);
-    console.log('selected filter -- ' + e.target.value);
+    console.log("selected filter -- " + e.target.value);
   };
 
   /**
@@ -138,53 +137,62 @@ function ChatBoxCustom({
    */
 
   const getLLMData = async (newMessage) => {
-    console.log('getLLMData custom chat bot started');
+    console.log("getLLMData custom chat bot started");
     try {
       //const fetchedSessionID = sessionID;
-        if (widgetFilter && widgetFilter == 'Pie') {
-          setHandleSpinnerLoading(true);
-        } else {
-          handleAPILoading(true);
-          handleActionsLoading(true);
-        }
-        // const postUserMessage = await postMessage(
-        //   newMessage,
-        //   "user"
-        // );
-        // const textAnalysisResponse = postUserMessage ? postUserMessage : "";
-        // handleAnalysisResponse(textAnalysisResponse);
-        // handleAPILoading(false);
-        const textActionResponse = await postAction(
-          newMessage,
-          "user",
-          widgetFilter
-        );
-        const apiResponse = textActionResponse?.data.choices[0].message.content
-        const unescapedApiResponse = apiResponse?.replace(/\\"/g, '"').replace(/\\n/g, '\n');
-        const validateResponse = JSON.parse(unescapedApiResponse)
-        console.log('response it valid json object' + JSON.stringify(validateResponse));
-        if (widgetFilter && widgetFilter == 'Pie') {
-          setTopGainersData(validateResponse.content);
-          setHandleSpinnerLoading(false);
-        } else {
-          handleActionResponse(textActionResponse);
-        }
-        
-        handleAPILoading(false);
-        handleActionsLoading(false);
+      if (widgetFilter && widgetFilter == "Pie") {
+        setHandleSpinnerLoading(true);
+      } else {
+        handleAPILoading(true);
+        handleActionsLoading(true);
+      }
+      // const postUserMessage = await postMessage(
+      //   newMessage,
+      //   "user"
+      // );
+      // const textAnalysisResponse = postUserMessage ? postUserMessage : "";
+      // handleAnalysisResponse(textAnalysisResponse);
+      // handleAPILoading(false);
+      const textActionResponse = await postAction(
+        newMessage,
+        "user",
+        widgetFilter
+      );
+      const apiResponse = textActionResponse?.data.choices[0].message.content;
+      const unescapedApiResponse = apiResponse
+        ?.replace(/\\"/g, '"')
+        .replace(/\\n/g, "\n");
+      const validateResponse = JSON.parse(unescapedApiResponse);
+      console.log(
+        "response it valid json object" + JSON.stringify(validateResponse)
+      );
+      if (widgetFilter && widgetFilter == "Pie") {
+        setTopGainersData(validateResponse.content);
+        setHandleSpinnerLoading(false);
+      } else {
+        handleActionResponse(textActionResponse);
+      }
 
-        const agentResponse = (textActionResponse.data.choices ? textActionResponse.data.choices[0].message.content : " ");
-        //setDataModelResponse(agentResponse);
-        const botDefaultResponse = "Your dashboard has been updated with the latest information.";
-        
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { type: "bot", text: botDefaultResponse },
-        ]);
-        return agentResponse;
+      handleAPILoading(false);
+      handleActionsLoading(false);
+
+      const agentResponse = textActionResponse.data.choices
+        ? textActionResponse.data.choices[0].message.content
+        : " ";
+      //setDataModelResponse(agentResponse);
+      const botDefaultResponse =
+        "Your dashboard has been updated with the latest information.";
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: "bot", text: botDefaultResponse },
+      ]);
+      return agentResponse;
     } catch (error) {
-      const botErrorResponse = "I am facing connectivity issue, please try again later.";
-      const botRetryResponse = "Not able to find any relevant data, please refine your query for better experiance.";
+      const botErrorResponse =
+        "I am facing connectivity issue, please try again later.";
+      const botRetryResponse =
+        "Not able to find any relevant data, please refine your query for better experiance.";
       setMessages((prevMessages) => [
         ...prevMessages,
         { type: "bot", text: botRetryResponse },
@@ -195,8 +203,52 @@ function ChatBoxCustom({
     }
   };
 
+  const onSocketResponse = (err, userText, response) => {
+    if(userText) {
+      setMessages([...messages, { type: "user", text: userText }]);
+    }
+    if (err) {
+      const botRetryResponse =
+        "Not able to find any relevant data, please refine your query for better experiance.";
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: "bot", text: botRetryResponse },
+      ]);
+      handleAPILoading(false);
+      handleActionsLoading(false);
+      return;
+    }
+    if (!response) return;
+    console.log("socket response", response);
+    if (widgetFilter && widgetFilter == "Pie") {
+      setTopGainersData(response.content);
+      setHandleSpinnerLoading(false);
+    } else {
+      setParsedResponse(response);
+    }
+    handleAPILoading(false);
+    handleActionsLoading(false);
+    const botDefaultResponse =
+      "Your dashboard has been updated with the latest information.";
+
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { type: "bot", text: botDefaultResponse },
+    ]);
+  };
+
+  const onStopConversation = () => {
+    if (widgetFilter && widgetFilter == "Pie") {
+      setHandleSpinnerLoading(true);
+    } else {
+      setIsChatBotRequestStarted(true);
+      handleAPILoading(true);
+      handleActionsLoading(true);
+    }
+  };
+
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleUserMessage();
     }
   };
@@ -216,16 +268,37 @@ function ChatBoxCustom({
       <div className="filters">
         <h4>Widget Filters</h4>
         <ul>
-        <li>
-            <input id="Pie" type="radio" value="Pie" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Pie'} />
+          <li>
+            <input
+              id="Pie"
+              type="radio"
+              value="Pie"
+              name="filters"
+              onChange={handleFilterChange}
+              checked={widgetFilter === "Pie"}
+            />
             <label htmlFor="Pie">Previous investment memo trends</label>
           </li>
           <li>
-            <input id="Company" type="radio" value="Company" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Company'} />
+            <input
+              id="Company"
+              type="radio"
+              value="Company"
+              name="filters"
+              onChange={handleFilterChange}
+              checked={widgetFilter === "Company"}
+            />
             <label htmlFor="Company">Company Insight</label>
           </li>
           <li>
-            <input id="Other" type="radio" value="Other" name="filters" onChange={handleFilterChange} checked={widgetFilter === 'Other'} />
+            <input
+              id="Other"
+              type="radio"
+              value="Other"
+              name="filters"
+              onChange={handleFilterChange}
+              checked={widgetFilter === "Other"}
+            />
             <label htmlFor="Other">Ask Investment Assistant</label>
           </li>
         </ul>
@@ -233,15 +306,12 @@ function ChatBoxCustom({
       <div className="chatbox">
         <div className="messages">
           {messages.map((message, idx) => (
-            <div className={
+            <div
+              className={
                 message.type === "bot" ? "bot-container1" : "user-container"
               }
             >
-              {message.type === "bot1" && (
-                <div className="bot-avatar">
-                  B
-                </div>
-              )}
+              {message.type === "bot1" && <div className="bot-avatar">B</div>}
 
               <div key={idx} className={`message ${message.type}`}>
                 <div className="bubble">
@@ -253,7 +323,6 @@ function ChatBoxCustom({
                     </div>
                   )}
                   <div className="message-text">{message.text}</div>
-                  
                 </div>
               </div>
             </div>
@@ -263,15 +332,19 @@ function ChatBoxCustom({
         <div className="botIcon">
           <img src="/assets/chatbot.svg" alt="chat bot" />
         </div>
-        <div className="input-area">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder= {widgetFilter == 'Company' ? "Please enter company name" : "Ask insights from your AI Assistant"} 
-          />
-          {/*<button onClick={handleUserMessage}>&gt;&gt;</button>*/}
-        </div>
+        <InputArea
+          input={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          widgetFilter={widgetFilter}
+          placeholder={
+            widgetFilter == "Company"
+              ? "Please enter company name"
+              : "Ask insights from your AI Assistant"
+          }
+          onSocketResponse={onSocketResponse}
+          onStopConversation={onStopConversation}
+        />
       </div>
     </div>
   );

@@ -16,28 +16,29 @@ const AnalysisReport = ({
   isActionsLoading,
   summaryHistory,
   sentimentHistory,
-  setSelectedAction
+  setSelectedAction,
+  parsedResponse,
 }) => {
   const { summary, sentiment } = analysisResponse?.data || {};
   const reversedSummaryHistory = [...summaryHistory].reverse().slice(1);
-  // const { actions, sources, trends, content, data } = actionsResponse?.data || {};
-  const apiResponse = actionsResponse?.data.choices[0].message.content;
-  const { actions, references, content, data, content_format } = apiResponse || {};
-
-  // Remove escape characters \" and \n
-  const unescapedApiResponse = apiResponse?.replace(/\\"/g, '"').replace(/\\n/g, '\n');
-  let apiResponseObj = "";
-  if (unescapedApiResponse) {
-    apiResponseObj = JSON.parse(unescapedApiResponse);
+  let apiResponseObj = {};
+  if (parsedResponse) {
+    apiResponseObj = parsedResponse;
+  } else {
+    const apiResponse = actionsResponse?.data?.choices[0].message.content;
+    // Remove escape characters \" and \n
+    const unescapedApiResponse = apiResponse
+      ?.replace(/\\"/g, '"')
+      .replace(/\\n/g, "\n");
+    if (unescapedApiResponse) {
+      apiResponseObj = JSON.parse(unescapedApiResponse);
+    }
   }
-
   const containerClass = `analyse-container ${
     isMessageLoading ? "loading" : ""
   } ${isActionsLoading ? "actions-loading" : ""}`;
 
-  const pageHeadClass = `page-heading ${
-    isActionsLoading ? "loading" : ""
-  }`;
+  const pageHeadClass = `page-heading ${isActionsLoading ? "loading" : ""}`;
 
   // const getComponent = ()  => {
   //   let component;
@@ -57,7 +58,7 @@ const AnalysisReport = ({
   return (
     <div className={containerClass}>
       <h2 className={pageHeadClass}>
-        {'Your personal AI investment analyst...'}
+        {"Your personal AI investment analyst..."}
         <Spinner />
       </h2>
 
@@ -72,70 +73,93 @@ const AnalysisReport = ({
             reversedSummaryHistory={reversedSummaryHistory}
           />
         </div> */}
-          { apiResponseObj.content_format == 'paragraph' ? (
-            <div className="column">
-              <Summary content={apiResponseObj.content}  />
-            </div>
-          ) : ''}
-          
-          { apiResponseObj.content_format == 'list' ? (
+        {apiResponseObj.content_format == "paragraph" ? (
           <div className="column">
-            <Actions actions={apiResponseObj.content} isActionsLoading={isActionsLoading} setSelectedAction={setSelectedAction}  />
+            <Summary content={apiResponseObj.content} />
+          </div>
+        ) : (
+          ""
+        )}
+
+        {apiResponseObj.content_format == "list" ? (
+          <div className="column">
+            <Actions
+              actions={apiResponseObj.content}
+              isActionsLoading={isActionsLoading}
+              setSelectedAction={setSelectedAction}
+            />
             {/* <Summary content={apiResponseObj.content}  /> */}
           </div>
-          ) : ''}
-          { apiResponseObj.content_format == 'timeseries' ? (
-            <div className="row">
-
-              <div className="column">
-                <h3>{apiResponseObj.content.Heading}</h3>
-                {/* <LineChart lineChartData={apiResponseObj.content} /> */}
-                <LinearChart chartData={apiResponseObj.content} />
-              </div>
-              <div className="column">
-                <h3>Insights</h3>
-                <p>{apiResponseObj.content.Summary}</p>
-              </div>
+        ) : (
+          ""
+        )}
+        {apiResponseObj.content_format == "timeseries" ? (
+          <div className="row">
+            <div className="column">
+              <h3>{apiResponseObj.content.Heading}</h3>
+              {/* <LineChart lineChartData={apiResponseObj.content} /> */}
+              <LinearChart chartData={apiResponseObj.content} />
             </div>
-          ) : ''}
-
-          { apiResponseObj.content_format == 'timeseries-multi' ? (
-            <div className="row">
-              <div className="column">
-                <h3>{apiResponseObj.content.Heading}</h3>
-                {/* <LineChart lineChartData={apiResponseObj.content} /> */}
-                <CompareChart chartData={apiResponseObj.content} />
-              </div>
-              <div className="column">
-                <h3>Insights</h3>
-                <p>{apiResponseObj.content.Summary}</p>
-              </div>
+            <div className="column">
+              <h3>Insights</h3>
+              <p>{apiResponseObj.content.Summary}</p>
             </div>
-          ) : ''}
+          </div>
+        ) : (
+          ""
+        )}
 
-          { apiResponseObj.content_format == 'Tabular' ? (
-            <div className="row">
-              <div className="column">
-                <h3>{apiResponseObj.content.heading}</h3>
-                {/* <LineChart lineChartData={apiResponseObj.content} /> */}
-                <Table showTitle={true} columns={apiResponseObj.content.data.columns} data={apiResponseObj.content.data.results} />
-              </div>
-              {apiResponseObj.content?.keyHighlight.length ? (<div className="column keyhighlight-box">
+        {apiResponseObj.content_format == "timeseries-multi" ? (
+          <div className="row">
+            <div className="column">
+              <h3>{apiResponseObj.content.Heading}</h3>
+              {/* <LineChart lineChartData={apiResponseObj.content} /> */}
+              <CompareChart chartData={apiResponseObj.content} />
+            </div>
+            <div className="column">
+              <h3>Insights</h3>
+              <p>{apiResponseObj.content.Summary}</p>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {apiResponseObj.content_format == "Tabular" ? (
+          <div className="row">
+            <div className="column">
+              <h3>{apiResponseObj.content.heading}</h3>
+              {/* <LineChart lineChartData={apiResponseObj.content} /> */}
+              <Table
+                showTitle={true}
+                columns={apiResponseObj.content.data.columns}
+                data={apiResponseObj.content.data.results}
+              />
+            </div>
+            {apiResponseObj.content?.keyHighlight.length ? (
+              <div className="column keyhighlight-box">
                 <h3>Key highlights</h3>
                 <p>{apiResponseObj.content?.keyHighlight}</p>
-              </div>): ''}
-            </div>
-          ) : ''}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        ) : (
+          ""
+        )}
 
-          { apiResponseObj.content_format == 'company' ? (
-            <Company company={apiResponseObj} />
-          ) : ''}
+        {apiResponseObj.content_format == "company" ? (
+          <Company company={apiResponseObj} />
+        ) : (
+          ""
+        )}
 
-          { references ? (
-            <Sources sources={references} isActionsLoading={isActionsLoading} />
-          ) : ''}
-
-
+        {apiResponseObj.references ? (
+          <Sources sources={references} isActionsLoading={isActionsLoading} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -1303,6 +1303,7 @@ export const Dashboard = () => {
   const [subSectorsData, setSubSectorsData] = useState([]);
   const [analysisResponse, setAnalysisResponse] = useState(null);
   const [actionsResponse, setActionsResponse] = useState(null);
+  const [parsedResponse, setParsedResponse] = useState(null);
   const [isMessageLoading, setIsMessageLoading] = useState(false);
   const [isActionsLoading, setIsActionsLoading] = useState(false);
   const [summaryHistory, setSummaryHistory] = useState([]);
@@ -1332,7 +1333,7 @@ export const Dashboard = () => {
   useEffect(() => {
     setLineChartData(equity_Indices);
     //setTopGainersData(healthcare_topGainers);
-    getLLMData("What are the top trends in Healthcare sector in Canada", "Pie");
+    getLLMData("top gainers in healthcare sector in canada", "Pie");
     setSubSectorsData(healthcare_subSector);
     setIsChatBotRequestStarted(false);
   }, [])
@@ -1394,6 +1395,7 @@ export const Dashboard = () => {
             summaryHistory={summaryHistory}
             sentimentHistory={sentimentHistory}
             setSelectedAction={setSelectedAction}
+            parsedResponse={parsedResponse}
           />
           ) : (" ")}
         </div>
@@ -1596,6 +1598,7 @@ export const Dashboard = () => {
               setIsChatBotRequestStarted={setIsChatBotRequestStarted}
               setTopGainersData={setTopGainersData}
               setHandleSpinnerLoading={setHandleSpinnerLoading}
+              setParsedResponse={setParsedResponse}
             />
         </div>
       </div>
