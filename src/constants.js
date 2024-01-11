@@ -25,7 +25,7 @@ export const DEFAULT_MEDIA_CONSTRAINTS = {
   },
 };
 export const TIME_SLICE_DEFAULT = 3000;
-export const SOCKET_URL = 'http://localhost:3001'
+export const SOCKET_URL = 'https://aibot.hariom.uk'
 export const CONVERSATION_STATUS = {
   STARTED: 'STARTED',
   WAITING: 'WAITING',
